@@ -68,8 +68,13 @@ class Drone(ap.Agent):
         self.perception_data = {} #here we are going to get the perception data
         self.is_detecting_something = False #here the drone detect something
         self.rules = [
-            ({"perception": {"below": 1}, "detect_something": False}, "none"),
-            ({"percetion": {"below": 2}, "detect_something": True}, "alert"),  
+            ({"perception": {"below": 1}, "detect_suspicious": False}, "continue"),
+            ({"percetion": {"below": 2}, "detect_suspicious": True}, "alert"),
+            ({"perception": {"below": 1}, "detect_guard": False}, "continue"),
+            ({"percetion": {"below": 2}, "detect_guard": True}, "alert"), 
+            ({"perception": {"below": 1}, "detect_landing": False}, "continue"),
+            ({"percetion": {"below": 2}, "landing": True}, "descend"),
+
         ]
 
     def get_state(self): #here we are going to get the state of the drone
@@ -95,6 +100,45 @@ class Drone(ap.Agent):
                 for direction, expected in value.items():
                     if self.perception_data.get(direction) != expected:
                         return False
-            elif key == "detect_something":
+            elif key == "detect_suspicious":
                 if self.is_detecting_something != value:
                     return False
+            elif key == "detect_guard":
+                if self.is_detecting_something != value:
+                    return False
+            elif key == "detect_landing":
+                if self.is_detecting_something != value:
+                    return False
+            
+        
+    
+    def get_suspicious_direction(self):
+        return [direction for direction, value in self.perception_data.items() if value == 1]
+
+    def get_free_directions(self):
+        return [direction for direction, value in self.perception_data.items() if value == 0]
+    
+    def get_guard_direction(self):
+        return [direction for direction, value in self.perception_data.items() if value == 2]
+    
+    def perceive_and_act(self):
+        print(f"PErceiving and acting... There is suspicious activity {self.is_detecting_something}")
+
+        if self.is_detecting_something:
+            suspicious_direction = self.get_suspicious_direction()
+            if suspicious_direction: 
+                chosen_direction = random.choice(suspicious_direction)
+                print(f"Alerting in direction {chosen_direction}")
+                return f"alert {chosen_direction}"
+            
+            else: 
+                free_directions = self.get_free_directions()
+                if free_directions: 
+                    choosen_direction = random.choice(free_directions)
+                    print(f"Moving in direction  {choosen_direction} with an alert")
+                    return f"move {choosen_direction}"
+                else: 
+                    print("no free space to move")
+                    return "wait"
+
+    
