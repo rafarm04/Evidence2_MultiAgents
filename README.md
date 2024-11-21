@@ -1,4 +1,4 @@
-```markdown
+
 # Integrated Autonomous Surveillance System
 
 ## Introduction
