@@ -1,11 +1,37 @@
 
 # Integrated Autonomous Surveillance System
 
+## Documentation
+
+You can find the detailed project documentation, including the system design, agent behaviors, implementation details, and analysis in our comprehensive report: [Project Documentation PDF](link_to_documentation.pdf)
+
+The documentation covers:
+
+- **Introduction**: An overview of the project's objectives and the challenges addressed.
+- **Team Composition**: Roles and contributions of each team member.
+- **Formal Proposal**: Detailed problem description, agents involved, environment setup, and success metrics.
+- **Work Plan and Acquired Learning**: Project timeline, responsibilities, and insights gained during development.
+- **Evidence**: Code excerpts and explanations of key components.
+- **Conclusion**: Reflections on the project's outcomes and future considerations.
+
+## Demonstration Video
+
+Watch a video demonstration of the current functionality of our system: [Project Demo Video](link_to_video.mp4)
+
+The video showcases:
+
+- The simulation environment with drones, cameras, and guards.
+- Agents performing their tasks within the grid.
+- Interactions between agents and objects.
+- The system's response to potential threats.
+
 ## Introduction
 
-In modern security operations, ensuring safety within large and complex environments poses significant challenges. Traditional surveillance methods often fall short in covering expansive areas like warehouses, factories, and agricultural zones effectively. This project presents an innovative solution by developing an integrated autonomous surveillance system that combines the capabilities of autonomous drones, fixed cameras, and advanced computer vision algorithms.
+Ensuring safety and security in large and complex environments like warehouses, factories, and agricultural areas is a significant challenge. Traditional surveillance methods often struggle to cover these vast spaces effectively. To tackle this issue, we have developed an innovative surveillance system that combines autonomous drones, strategically placed fixed cameras, and advanced computer vision techniques.
 
-Our system leverages multi-agent collaboration within a simulated environment to detect and respond to potential threats efficiently. By simulating agents such as drones, cameras, and security personnel, we aim to enhance surveillance operations' precision, reliability, and scalability.
+Our system relies on different agents working together seamlessly. Autonomous drones patrol the area, conducting inspections and responding to potential threats. Fixed cameras provide continuous monitoring of specific zones, enhancing the overall coverage. Security personnel are involved for critical decision-making and can intervene when necessary.
+
+These agents operate within a virtual environment, coordinating with each other to detect and respond to potential issues in real-time. The system is designed to maintain a balance between automated processes and human oversight, allowing for efficient surveillance while still enabling human operators to take control when needed. By integrating these technologies and fostering collaboration among the agents, we aim to improve the effectiveness and reliability of security operations in complex settings.
 
 ## Project Overview
 
@@ -173,6 +199,8 @@ Evidence2_MultiAgents_Drone/
 
 ```
 
+- **Documentation**: Contains the project documentation PDF.
+- **Video**: Contains the demonstration video.
 - **Part1_Backend**: Contains all Python scripts and resources for the agent simulation and backend logic.
 - **Part2_Frontend**: Contains the Unity project files for the visual simulation.
 
@@ -211,4 +239,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For any questions or contributions, please contact the project maintainers via the GitHub repository.
 
-```
