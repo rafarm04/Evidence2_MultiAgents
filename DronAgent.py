@@ -182,8 +182,125 @@ class GridModel(ap.Model):
             dron.onto_robot.id = i
         self.grid.add_agents(self.drons, random = True, empty = True)
 
+        self.objects = ap.AgentList(self, self.num_objects, ap.Agent)
         self.suspicious_objects = ap.AgentList(self, self.num_suspicious_objects, ap.Agent)
-        
+        self.grid.add_drons(self.objects, random = True, empty = True)
 
-
+        self.data = {
+            'steps_to_completion': None,
+            'detection': {dron.onto_robot.id: 0 for dron in self.drons}
+        }
     
+    def get_perception(self, dron): 
+        x, y = self.grid.positions[dron]
+        directions = {'F': (0, 1), 'B': (0, -1), 'L': (-1, 0), 'R': (1, 0)}        
+
+        perception = {} #perception of the drone
+        for direction, (dx, dy) in directions.items():
+            new_x, new_y = x + dx, y + dy #new position
+
+            if 0 <= new_x < self.grid_size and 0 <= new_y < self.grid_size:
+                cell_content =  self.grid.agents[new_x, new_y] #get the content of the cell
+                if not cell_content: 
+                    perception[direction] = 0
+                elif any(isinstance(agent, Drone) for agent in cell_content): 
+                    perception[direction] = 2
+                elif len(cell_content) == 1:
+                    perception[direction] = 1
+                else: 
+                    perception[direction] = 3
+            else: 
+                perception[direction] = 2
+        
+        return json.dumps({
+            "id": dron.onto_robot.id,
+            "position": perception
+        })
+
+    def update_enviroment(self, dron, action):
+        current_position = self.grid.positions[dron]
+
+        if action.startswith("alert_"):
+            direction = action.split("")[1]
+            if direction == "random":
+                direction = random.choice(["F", "B", "L", "R"])
+            dx, dy = {"F": (0, 1), "B": (0, -1), "L": (-1, 0), "R": (1, 0)}[direction]
+            new_position = (current_position[0] + dx, current_position[1] + dy)
+
+            if (0 <= new_position[0] < self.grid_size and 0 <= new_position[1] < self.grid_size and len(self.grid[new_position]) == 0):
+                self.grid.move_to(dron,new_position)
+                self.data["dron_movements"][dron.onto_robot.id] += 1
+
+            elif action.startswith("alert_"):
+                direction = action.split("_")[1]
+                if direction == "random":
+                    direction = random.choice(['F','B','L','R'])
+                
+                dx, dy = {'F': (0, 1), 'B': (0, -1), 'L': (-1, 0), 'R': (1, 0)}[direction]
+                new_position = (current_position[0] + dx, current_position + dy)
+            
+                if (0 <= new_position[0] < self.grid_size and 
+                    0 <= new_position[1] < self.grid_size and 
+                    len(self.grid.agents[new_position]) == 0):
+                    self.grid.move_to(dron, new_position)
+                    self.data['detection'][dron.onto_robot.id] += 1
+
+            elif action.startswith("alert_"):
+                direction = action.split("_")[1]
+                dx, dy = {'F': (0, 1), 'B': (0, -1), 'L': (-1, 0), 'R': (1, 0)}[direction]
+                alert_pos = (current_position[0] + dx, current_position[1] + dy)
+
+                if (0 <= alert_pos[0] < self.grid_size and 
+                    0 <= alert_pos[1] < self.grid_size):
+                    objects_at_pos = [agent for agent in self.grid.agents[grab_pos] if agent in self.objects]
+                    if objects_at_pos:
+                        alert_suspicious = objects_at_pos[0]
+                        self.grid.remove_agents(alert_suspicious)
+                        dron.onto_robot.is_holding = [onto.Object()]
+
+
+    def step(self):
+            self.current_step += 1
+
+            for dron in self.robots:
+                perception_json = self.get_perception(dron)
+                action = dron.step(perception_json)
+                self.update_environment(dron, action)
+
+            if self.check_end_condition():
+                self.stop()
+            self.current_step += 1
+
+            for dron in self.robots:
+                perception_json = self.get_perception(dron)
+                action = dron.step(perception_json)
+                self.update_environment(dron, action)
+
+            if self.check_end_condition():
+                self.stop()
+                
+    def check_end_condition(self):
+        all_stacks_valid = all(1 <= stack_size <= 5 for stack_size in self.stacks.values())
+        all_objects_stacked = sum(self.stacks.values()) == self.num_objects
+        all_robots_believe_finished = all(not robot.onto_robot.is_holding for robot in self.robots)
+        return all_stacks_valid and all_objects_stacked and all_robots_believe_finished
+
+    def end(self):
+        self.data['steps_to_completion'] = self.current_step
+        print(f"Simulation ended after {self.data['steps_to_completion']} steps")
+        print("Robot movements:")
+        for robot_id, movements in self.data['robot_movements'].items():
+            print(f"Robot {robot_id}: {movements} movements")
+
+    def run_model(parameters):
+        model = GridModel(parameters)
+        results = model.run()
+        return model, results
+
+    if __name__ == "__main__":
+        parameters = {
+            'num_objects': 20,
+            'grid_size': 10
+        }
+        model, results = run_model(parameters)
+
