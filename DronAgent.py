@@ -7,10 +7,13 @@ from owlready2 import *
 onto = get_ontology("file://onto.owl")
 
 with onto:
-    class Agent(Thing): #here we declare the class Agent
+    class Dron(Thing): #here we declare the class Agent
         pass
 
     class Position(Thing):#this class is going to be used to get the position of the drone
+        pass
+
+    class Object(Thing):
         pass
 
     class Direction(Thing):#this class is going to be used to get the direction of the drone
@@ -20,19 +23,19 @@ with onto:
         pass
 
     class has_position(ObjectProperty):#this class is going to be used to get the position of the drone
-        domain = [Agent] #domain: the class that is going to be used
+        domain = [Dron] #domain: the class that is going to be used
         range = [Position] #range: the class that is going to be used
 
     class has_perception(ObjectProperty): #this class is going to be used to get the perception of the drone
-        domain = [Agent]
-        range = [Direction]
+        domain = [Dron]
+        range = [Object]
 
     class detect_something(objectProperty): #this class is going to be used to get the detection of the drone
-        domain = [Agent]
-        range = [Direction]
+        domain = [Dron]
+        range = [Position]
 
     class can_perform(ObjectProperty):#this class is going to be used to get the action of the drone
-        domain = [Agent]
+        domain = [Dron]
         range = [Action]
 
     class Forward(Direction):
@@ -171,4 +174,16 @@ class GridModel(ap.Model):
         self.num_suspicions_onbjects = 3
         self.grid_size = self.p.grid_size
         self.current_step = 0
+        
+        self.grid = ap.Grid(self, (self.grid_size, self.grid_size), track_empty = True)
+
+        self.drons = ap.AgentList(self, self.num_drons, Drone)
+        for i, dron in enumerate(self.drons):
+            dron.onto_robot.id = i
+        self.grid.add_agents(self.drons, random = True, empty = True)
+
+        self.suspicious_objects = ap.AgentList(self, self.num_suspicious_objects, ap.Agent)
+        
+
+
     
