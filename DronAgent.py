@@ -70,10 +70,6 @@ class Drone(ap.Agent):
         self.rules = [
             ({"perception": {"below": 1}, "detect_suspicious": False}, "continue"),
             ({"percetion": {"below": 2}, "detect_suspicious": True}, "alert"),
-            ({"perception": {"below": 1}, "detect_guard": False}, "continue"),
-            ({"percetion": {"below": 2}, "detect_guard": True}, "alert"), 
-            ({"perception": {"below": 1}, "detect_landing": False}, "continue"),
-            ({"percetion": {"below": 2}, "landing": True}, "descend"),
 
         ]
 
@@ -103,13 +99,6 @@ class Drone(ap.Agent):
             elif key == "detect_suspicious":
                 if self.is_detecting_something != value:
                     return False
-            elif key == "detect_guard":
-                if self.is_detecting_something != value:
-                    return False
-            elif key == "detect_landing":
-                if self.is_detecting_something != value:
-                    return False
-            
         
     
     def get_suspicious_direction(self):
@@ -140,5 +129,46 @@ class Drone(ap.Agent):
                 else: 
                     print("no free space to move")
                     return "wait"
+        
+        else: 
+            alert_direction = self.get_suspicious_direction()
+            if alert_direction:
+                chosen_direction = random.choice(alert_direction)
+                print(f"Alerting in direction {chosen_direction}")
+                return f"alert {chosen_direction}"
+            else:
+                free_directions = self.get_free_directions()
+                if free_directions:
+                    choosen_direction = random.choice(free_directions)
+                    print(f"Moving in direction {choosen_direction}")
+                    return f"move {choosen_direction}"
+                else:
+                    print("No free space to move")
+                    return "wait"
+                
+    def act(self, action):
+        print(f"Perform action: {action}")
+        if action.startswith("move"):
+            self.movements += 1
+        elif action.startswith("alert"):
+            self.is_detecting_something = True
+        return action 
 
+    def reason(self):
+        print("reasoning...")
+        action = self.perceive_and_act()
+        return json.dumps({"action": action})
+        
+    def step(self, perception_json, stored_state = None):
+        print(f"Step with perception: {perception_json}")
+        self.update_state(perception_json,stored_state)
+        action = self.perceive_and_act()
+        return self.act(action)
+    
+class GridModel(ap.Model):
+    def setup(self):
+        self.num_drons = 1
+        self.num_suspicions_onbjects = 3
+        self.grid_size = self.p.grid_size
+        self.current_step = 0
     
