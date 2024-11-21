@@ -132,24 +132,45 @@ The second part involves creating a visual simulation of the environment using U
 
 ```
 Evidence2_MultiAgents_Drone/
-├── Part1_Backend/
-│   ├── agent.py
+├── Parte1/
+│   ├── __pycache__/
+│   ├── .gitignore
+│   ├── Agents.py
 │   ├── DronAgent.py
-│   ├── robotAgent.py
+│   ├── RobotAgent.py
 │   ├── server.py
 │   ├── onto.owl
 │   ├── requirements.txt
 │   └── README.md
-├── Part2_Frontend/
-│   ├── Assets/
-│   │   ├── Scripts/
-│   │   │   ├── ontologyManager.cs
-│   │   │   └── securitySimulation.cs
-│   │   └── Scenes/
-│   │       └── MainScene.unity
-│   └── ProjectSettings/
-├── README.md
-└── LICENSE (if applicable)
+├── Parte2/
+│   ├── Evidence2/
+│   │   ├── .vscode/
+│   │   ├── Assets/
+│   │   │   ├── Prefabs/
+│   │   │   ├── Scenes/
+│   │   │   └── Scripts/
+│   │   │       ├── OntologyManager.cs
+│   │   │       ├── SecuritySimulation.cs
+│   │   │       └── ThreeBox/
+│   │   ├── Unity Technologies/
+│   │   ├── NativeFunctionality.unity
+│   │   ├── Prefabs.meta
+│   │   ├── Scenes.meta
+│   │   ├── Scripts.meta
+│   │   ├── ServerFunctionality.unity
+│   │   ├── ThreeBox.meta
+│   │   └── Unity Technologies.meta
+│   ├── Library/
+│   ├── Logs/
+│   ├── Packages/
+│   ├── ProjectSettings/
+│   ├── UserSettings/
+│   ├── Assembly-CSharp.csproj
+│   ├── Evidence2.sln
+│   └── mono_crash.mem.19914.1.blob
+├── yolov8m.pt
+└── README.md
+
 ```
 
 - **Part1_Backend**: Contains all Python scripts and resources for the agent simulation and backend logic.
