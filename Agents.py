@@ -280,7 +280,7 @@ parameters = {
     "num_dron": 1,
     "objects": 5,
     "grid_size": 10,
-    "steps": 1000,
+    "steps": 100,
 }
 
 # Crear y ejecutar el modelo
