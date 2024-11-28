@@ -4,5 +4,4 @@ matplotlib==3.9.2
 matplotlib-inline==0.1.7
 numpy==2.1.0
 owlready2==0.46
-yolo==0.1.0
-ultralytics==0.0.2
+ultralytics
