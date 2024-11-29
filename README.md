@@ -1,5 +1,4 @@
 
-
 # Integrated Autonomous Surveillance System
 
 ## Documentation
@@ -14,6 +13,42 @@ The documentation covers:
 - **Work Plan and Acquired Learning**: Project timeline, responsibilities, and insights gained during development.
 - **Evidence**: Code excerpts and explanations of key components.
 - **Conclusion**: Reflections on the project's outcomes and future considerations.
+
+## Presentation Video
+
+Watch our project presentation to get an overview of our system, objectives, and key functionalities: [Project Presentation Video](https://drive.google.com/file/d/1ZUl4xF7xek332u1YjRMnMyrQVaFKNMhi/view?usp=sharing)
+
+The presentation includes:
+
+- **Context and Problem**:
+  - Briefly describe the context and the urban security challenge.
+  - Explain the problem being solved (coordinated patrolling, risk zones, etc.).
+
+- **Solution Overview**:
+  - High-level explanation of the multi-agent system design.
+  - Coordination between agents (drones, cameras, security personnel).
+  - Key features and use of computer vision.
+
+- **Relevant Technical Information**:
+  - Explain the computational models and interactions between agents.
+  - Key algorithms or strategies for:
+    - Autonomous drone operation.
+    - Surveillance using cameras and computer vision.
+    - Communication protocols among agents.
+  - Graphical interface design and decision-making logic.
+
+- **Demonstration**:
+  - Video summarizing the simulation, showcasing:
+    - Drone patrol.
+    - Interaction with cameras and response to alerts.
+    - Control handoff to security personnel.
+
+- **Results Analysis **:
+  - Results and formulas
+  - Reflect on strengths, advantages, and limitations of the solution.
+  - Suggestions for improvment.
+
+
 
 ## Demonstration Video
 
@@ -200,7 +235,8 @@ Evidence2_MultiAgents_Drone/
 ```
 
 - **Documentation**: Contains the project documentation PDF.
-- **Video**: Contains the demonstration video.
+- **Presentation Video**: Contains the project presentation video.
+- **Demonstration Video**: Contains the demonstration video.
 - **Part1_Backend**: Contains all Python scripts and resources for the agent simulation and backend logic.
 - **Part2_Frontend**: Contains the Unity project files for the visual simulation.
 
