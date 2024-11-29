@@ -1,4 +1,5 @@
 
+
 # Integrated Autonomous Surveillance System
 
 ## Documentation
@@ -196,7 +197,6 @@ Evidence2_MultiAgents_Drone/
 │   └── mono_crash.mem.19914.1.blob
 ├── yolov8m.pt
 └── README.md
-
 ```
 
 - **Documentation**: Contains the project documentation PDF.
@@ -212,6 +212,31 @@ Evidence2_MultiAgents_Drone/
 - **Flask**: A micro web framework for Python to facilitate communication between backend and frontend.
 - **Unity Engine**: For creating the visual simulation of the environment and agents.
 - **C#**: Scripting language used in Unity for frontend development.
+
+### YOLO Object Detection
+
+**YOLO (You Only Look Once)** is a real-time object detection algorithm that divides an input image into a grid and predicts bounding boxes, class labels, and confidence scores in a single pass through a neural network. Each grid cell detects multiple bounding boxes and assigns class probabilities, while confidence scores indicate how likely the detected object is and how accurate the bounding box is. YOLO processes the entire image at once, making it fast and efficient for real-time applications. After detection, a post-processing step called Non-Maximum Suppression (NMS) filters out redundant boxes, keeping the most confident predictions. This enables YOLO to quickly and accurately detect and classify objects in images.
+
+#### How the Server Functions with Unity
+
+- **Unity Captures the Image**:
+  - A camera in Unity (e.g., drone camera, fixed camera) captures an image.
+  - The script (`CameraCapture.cs`) converts the image into a PNG byte array.
+  
+- **Unity Sends the Image to the Server**:
+  - Unity (`YoloDetection.cs`) uses an HTTP POST request to send the captured image to the Flask server.
+  - The image is sent as part of a `multipart/form-data` request, ensuring compatibility with the Flask server.
+  
+- **Server Processes the Image**:
+  - The Flask server receives the image and decodes it using OpenCV.
+  - The YOLO model processes the image, identifying objects and their bounding boxes.
+  
+- **Server Responds to Unity**:
+  - The Flask server formats the detection results as JSON and sends them back to Unity.
+  - The JSON includes details like detected object classes and bounding box coordinates.
+  
+- **Unity Processes the Results**:
+  - Unity parses the JSON response and uses it to implement game logic, such as highlighting detected objects or triggering actions based on specific detections.
 
 ## Team Members
 
@@ -238,4 +263,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 For any questions or contributions, please contact the project maintainers via the GitHub repository.
-
