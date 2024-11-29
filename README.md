@@ -203,35 +203,34 @@ Evidence2_MultiAgents_Drone/
 │   ├── server.py
 │   ├── onto.owl
 │   ├── requirements.txt
+│   ├── yolov8m.pt
 │   └── README.md
 ├── Parte2/
 │   ├── Evidence2/
 │   │   ├── .vscode/
 │   │   ├── Assets/
-│   │   │   ├── Prefabs/
-│   │   │   ├── Scenes/
-│   │   │   └── Scripts/
-│   │   │       ├── OntologyManager.cs
-│   │   │       ├── SecuritySimulation.cs
-│   │   │       └── ThreeBox/
-│   │   ├── Unity Technologies/
-│   │   ├── NativeFunctionality.unity
-│   │   ├── Prefabs.meta
-│   │   ├── Scenes.meta
-│   │   ├── Scripts.meta
-│   │   ├── ServerFunctionality.unity
-│   │   ├── ThreeBox.meta
-│   │   └── Unity Technologies.meta
-│   ├── Library/
-│   ├── Logs/
-│   ├── Packages/
-│   ├── ProjectSettings/
-│   ├── UserSettings/
-│   ├── Assembly-CSharp.csproj
-│   ├── Evidence2.sln
-│   └── mono_crash.mem.19914.1.blob
-├── yolov8m.pt
-└── README.md
+│   │   ├── Library/
+│   │   ├── Logs/
+│   │   ├── Packages/
+│   │   ├── ProjectSettings/
+│   │   ├── UserSettings/
+│   │   ├── Assembly-CSharp.csproj
+│   │   ├── Evidence2.sln
+│   │   └── mono_crash.mem.19914.1.blob
+├── Parte3/
+│   ├── YOLO integration/
+│   │   ├── .vscode/
+│   │   ├── Assets/
+│   │   ├── Library/
+│   │   ├── Logs/
+│   │   ├── Packages/
+│   │   ├── ProjectSettings/
+│   │   ├── UserSettings/
+│   │   ├── Assembly-CSharp.csproj
+│   │   ├── YOLO integration.sln
+│   │   ├── requirements.txt
+│   │   ├── YOLO.py
+│   │   └── README.md
 ```
 
 - **Documentation**: Contains the project documentation PDF.
