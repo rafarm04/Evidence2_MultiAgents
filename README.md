@@ -1,3 +1,5 @@
+Certainly! Below is the updated Markdown document with the new **Access to Individual Reflections** section added. This section includes a paragraph explaining the purpose and a clickable hyperlink embedded within the text "Link to Individual Reflections."
+
 
 # Integrated Autonomous Surveillance System
 
@@ -46,9 +48,7 @@ The presentation includes:
 - **Results Analysis **:
   - Results and formulas
   - Reflect on strengths, advantages, and limitations of the solution.
-  - Suggestions for improvment.
-
-
+  - Suggestions for improvement.
 
 ## Demonstration Video
 
@@ -60,6 +60,12 @@ The video showcases:
 - Agents performing their tasks within the grid.
 - Interactions between agents and objects.
 - The system's response to potential threats.
+
+## Access to Individual Reflections
+
+To ensure transparency and provide detailed insights into each team member's contributions and reflections, we have compiled all individual reflections into a shared folder. This folder contains comprehensive documentation, including personal accounts of challenges faced, skills acquired, and broader learning outcomes from the project. You can access the folder using the following link:
+
+**[Link to Individual Reflections](https://drive.google.com/drive/folders/1p35WYDfAf0RrdqLNqgfHHi3W0yteWTSk?usp=sharing)**
 
 ## Introduction
 
@@ -296,5 +302,3 @@ For their guidance and support throughout this project.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-For any questions or contributions, please contact the project maintainers via the GitHub repository.
