@@ -52,8 +52,7 @@ The presentation includes:
 
 ## Demonstration Video
 
-Watch a video demonstration of the current functionality of our system: [Project Demo Video](https://drive.google.com/file/d/1dVTSWxUu3o26loMIPVybDsQRUuWz5jA1/view?usp=sharing)
-
+Watch a video demonstration of the current functionality of our system: [Project Demo Video](https://drive.google.com/file/d/1aNGAMR762esuUPMz4q5vHNhNU75_uus3/view?usp=sharing)
 The video showcases:
 
 - The simulation environment with drones, cameras, and guards.
